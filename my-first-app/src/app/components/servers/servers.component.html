@@ -1,0 +1,13 @@
+<label>Server Name</label>
+<input type="text" class="form-control" [(ngModel)]="serverName">
+<button class="btn btn-primary" [disabled]="!allowNewServers" (click)="onCreateServer()">Add server</button>
+<p *ngIf="serverName !== ''; else noServerCreated">{{serverCreationStatus}}</p>
+<ng-template #noServerCreated>
+  <p>No server was created!</p>
+</ng-template>
+<hr>
+<button class="btn btn-primary" (click)="onDisplayDetails()">{{displayDetailsLabel}}</button>
+<p *ngIf="displayDetails">Secret Password: tuna</p>
+<p *ngFor="let timestamp of displayDetailsClicks; let i = index" [ngStyle]="{backgroundColor: getBackgroundColor(i)}">{{timestamp}}</p>
+<hr>
+<app-server *ngFor="let server of servers">{{server}}</app-server>
