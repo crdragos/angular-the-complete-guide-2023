@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Recipe} from "../../../models/recipe";
+import {RecipesService} from "../../../services/recipes.service";
 
 @Component({
   selector: 'app-recipe-list',
@@ -7,22 +8,12 @@ import {Recipe} from "../../../models/recipe";
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
-  recipes: Recipe[] = [
-    new Recipe('A test recipe 1', 'This is simply a test 1', 'https://mollysmtview.com/wp-content/uploads/2023/02/84_SMI_EASY-DINNER-KETO-CROCKPOT-RECIPES-1024x538.jpg'),
-    new Recipe('A test recipe 2', 'This is simply a test 2', 'https://mollysmtview.com/wp-content/uploads/2023/02/84_SMI_EASY-DINNER-KETO-CROCKPOT-RECIPES-1024x538.jpg'),
-    new Recipe('A test recipe 3', 'This is simply a test 3', 'https://mollysmtview.com/wp-content/uploads/2023/02/84_SMI_EASY-DINNER-KETO-CROCKPOT-RECIPES-1024x538.jpg'),
-    new Recipe('A test recipe 4', 'This is simply a test 4', 'https://mollysmtview.com/wp-content/uploads/2023/02/84_SMI_EASY-DINNER-KETO-CROCKPOT-RECIPES-1024x538.jpg'),
-  ];
+  public recipes: Recipe[] = [];
 
-  @Output() selectRecipeEvent: EventEmitter<Recipe> = new EventEmitter<Recipe>();
-
-  constructor() {
+  constructor(private recipesService: RecipesService) {
   }
 
   ngOnInit(): void {
-  }
-
-  onRecipeClicked(recipe: Recipe) {
-    this.selectRecipeEvent.emit(recipe);
+    this.recipes = this.recipesService.getRecipes();
   }
 }
