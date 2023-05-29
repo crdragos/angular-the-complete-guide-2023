@@ -9,6 +9,7 @@ export class RecipesService {
 
   private recipes: Recipe[] = [
     new Recipe(
+      1,
       'Tasty schnitzel',
       'A super tasty schnitzel - just awesome!',
       'https://mydinner.co.uk/wp-content/uploads/2022/02/cordon-blue-schnitzel-1.jpg',
@@ -18,6 +19,7 @@ export class RecipesService {
       ],
     ),
     new Recipe(
+      2,
       'Big Fat Burger',
       'What else you need to say?',
       'https://hips.hearstapps.com/hmg-prod/images/copycat-western-bacon-cheeseburger-2-1651789305.jpeg?crop=1.00xw:0.755xh;0,0.166xh&resize=1200:*',
@@ -42,5 +44,9 @@ export class RecipesService {
 
   addIngredientsToShoppingList(ingredients: Ingredient[]): void {
     this.slService.addIngredients(ingredients);
+  }
+
+  getRecipeById(id: number) {
+    return this.recipes.filter(recipe => recipe.id === id).at(0);
   }
 }
