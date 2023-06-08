@@ -20,6 +20,12 @@ export class AppComponent {
     gender: ''
   }
 
+  /// assigment variables
+  @ViewChild('assigmentForm') assignmentForm: NgForm;
+  subscriptions: string[] = ['Basic', 'Advanced', 'Pro'];
+  defaultSubscription: string = 'Advanced';
+  assignmentUser = {email: '', subscription: '', password: ''};
+
   suggestUserName() {
     const suggestedName = 'Superuser';
     // setValue is used for the whole form
@@ -53,5 +59,13 @@ export class AppComponent {
     this.user.gender = this.signUpForm.value.gender;
     this.submitted = true;
     this.signUpForm.reset();
+  }
+
+  onSubmitAssignmentForm(): void {
+    this.assignmentUser.email = this.assignmentForm.value.email;
+    this.assignmentUser.subscription = this.assignmentForm.value.subscription;
+    this.assignmentUser.password = this.assignmentForm.value.password;
+    console.log('[email: ' + this.assignmentUser.email + ' | subscription: ' + this.assignmentUser.subscription + ' | password: ' + this.assignmentUser.password + ']')
+    this.assignmentForm.reset();
   }
 }
